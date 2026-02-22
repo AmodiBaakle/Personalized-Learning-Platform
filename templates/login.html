@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .form {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group input {
+            width: calc(100% - 20px); /* Adjusted width to fit inside the input-group */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        .primary-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .primary-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .login-link {
+            color: #007bff; /* Primary blue color */
+            font-weight: bold; /* Make the text bold */
+            text-decoration: none; /* Remove underline */
+        }
+        
+        .login-link:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+        
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="post" action="/login">
+        {% csrf_token %}
+        <div class="form">
+            <h2 class="center">Login</h2> <!-- Center align the heading -->
+            <div class="input-group">
+                <input type="text" placeholder="Username" name="username">
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Password" name="pass">
+            </div>
+            <button class="primary-btn">Login</button>
+            <p class="left"><a href="/signup" class="signup-link">Create an account</a></p>
+        </div>
+    </div>
+</body>
+</html>

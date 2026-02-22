@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block title %}Page 1{% endblock title %}
+{% block head %}
+<style>
+    body {
+        background-color: #F4F4F4;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        background-color: #FFFFFF;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        width: 60%; /* Increase the width */
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+    }
+    .container2 {
+        background-color: #FFFFFF;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        width: 90%; /* Increase the width */
+        height: auto; /* Adjust height */
+        text-align: left; /* Left align text for better readability */
+    }
+    .tabs {
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    .tabs > div {
+        padding: 0 10px;
+    }
+    .tabs > div:first-child {
+        padding-left: 70px;
+    }
+    .tabs > div:last-child {
+        padding-right: 70px;
+    }
+    .tabs > div.active {
+        font-weight: bold;
+        border-bottom: 2px solid blue;
+    }
+    .content-container {
+        margin-top: 20px;
+    }
+    pre, .code-block {
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        font-size: 1em;
+        margin-bottom: 20px; /* Add some space below code blocks */
+    }
+    .code-block {
+        background-color: #f4f4f4;
+        border-left: 5px solid #3a6ea5;
+        padding: 10px;
+        font-size: 1.1em;
+    }
+    h1, h2, p {
+        color: #333;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.5em;
+        margin-top: 20px;
+    }
+    p {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+    .content-url {
+        font-size: 0.9em;
+        color: #555;
+    }
+</style>
+
+<script>
+    function showContent(contentId, element) {
+        const tabs = document.querySelectorAll('.tabs > div');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        element.classList.add('active');
+
+        const container2 = document.getElementById('container2');
+        let content;
+        switch (contentId) {
+            case 'GFG':
+                content = `{{ pref1.content|safe }}`;
+                break;
+            case 'W3Schools':
+                content = `{{ pref2.content|safe }}`;
+                break;
+            case 'Youtube':
+                content = `{{ pref3.content|safe }}`;
+                break;
+            default:
+                content = '';
+        }
+        container2.innerHTML = content;
+    }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const params = new URLSearchParams(window.location.search);
+            const tab = params.get('tab');
+            if (tab) {
+                const tabElement = document.querySelector(`.tabs > div[onclick="showContent('${tab}', this)"]`);
+                if (tabElement) {
+                    tabElement.click();
+                }
+            }
+        });
+    </script>
+{% endblock head %}
+{% block body %}
+    <div class="container">
+        <div class="tabs">
+            <div onclick="showContent('GFG', this)">Geeks for Geeks</div>
+            <div onclick="showContent('W3Schools', this)">W3Schools</div>
+            <div onclick="showContent('Youtube', this)">Youtube</div>
+        </div>
+    </div>
+    <div id="container2" class="container2">
+        <!-- Content for container2 will be rendered here -->
+    </div>
+{% endblock body %}

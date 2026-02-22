@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Results Page{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+    .results-container {
+        padding-left: 150px;
+        padding-right: 150px;
+        display: flex;
+        margin-top: 50px; /* Adjust margin as needed */
+    }
+
+    .result-image {
+        margin-right: 70px; /* Adjust margin as needed */
+        margin-top: 70px;
+    }
+
+    .result-image img {
+        width: 450px; /* Adjust the width of the image */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .result-content {
+        width: 100%; /* Make sure it takes the full width of the container */
+    }
+
+    .result-content h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 24px;
+        text-align: center; /* Center the heading */
+    }
+
+    .result-row {
+        display: flex;
+        margin-bottom: 20px;
+        border: 1px solid #ccc; /* Add a thin border to the rows */
+        border-radius: 10px; /* Optional: add border-radius for rounded corners */
+        padding: 10px; /* Add some padding inside the box */
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+        margin-right: 30px;
+        margin-top:20px;
+    }
+
+    .result-content h2 {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .result-content h3 {
+        font-size: 16px;
+        color: gray;
+        margin: 0;
+    }
+
+    .result-content p {
+        margin: 10px 0 0;
+    }
+</style>
+{% endblock head %}
+{% block body %}
+<div class="results-container">
+    <div class="result-image">
+        <!-- Image goes here -->
+        <img src="{% static 'result_page.png' %}" alt="Image">
+    </div>
+    <div class="result-content">
+        <h1>Recommendations</h1>
+
+        <div class="result-row">
+            <a href="" name="{{Pref1.pref1}}" onclick="sendPostRequest(event)" target="_blank">
+                <img src="{{Pref1.img_url}}" alt="Website Logo" class="logo">
+            </a>
+            <div class="result-content">
+                <h2><a href="" name="{{Pref1.pref1}}" onclick="sendPostRequest(event)" target="_blank">{{ Pref1.subtopic }}</a></h2>
+                <h3>{{Pref1.pref1}}</h3>
+                <p> Let us study {{Pref1.subtopic}} from {{Pref1.pref1}} <a href="" name="{{Pref1.pref1}}" onclick="sendPostRequest(event)" target="_blank">Read More</a></p>
+            </div>
+        </div>
+
+        <div class="result-row">
+            <a href="" name="{{Pref2.pref1}}" onclick="sendPostRequest(event)" target="_blank">
+                <img src="{{Pref2.img_url}}" alt="Website Logo" class="logo">
+            </a>
+            <div class="result-content">
+                <h2><a href="" name="{{Pref2.pref1}}" onclick="sendPostRequest(event)" target="_blank">{{ Pref2.subtopic }}</a></h2>
+                <h3>{{Pref2.pref1}}</h3>
+                <p> Let us study {{Pref2.subtopic}} from {{Pref2.pref1}} <a href="" name="{{Pref2.pref1}}" onclick="sendPostRequest(event)" target="_blank">Read More</a></p>
+            </div>
+        </div>
+
+        <div class="result-row">
+            <a href="" name="{{Pref3.pref1}}" onclick="sendPostRequest(event)" target="_blank">
+                <img src="{{Pref3.img_url}}" alt="Website Logo" class="logo">
+            </a>
+            <div class="result-content">
+                <h2><a href="" name="{{Pref3.pref1}}" onclick="sendPostRequest(event)" target="_blank">{{ Pref3.subtopic }}</a></h2>
+                <h3>{{Pref3.pref1}}</h3>
+                <p> Let us study {{Pref3.subtopic}} from {{Pref3.pref1}} <a href="" name="{{Pref2.pref1}}" onclick="sendPostRequest(event)" target="_blank">Read More</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function sendPostRequest(event) {
+        event.preventDefault();
+        const nameAttribute = event.target.getAttribute('name');
+    
+        fetch('/results/{{Pref3.subtopic}}/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({
+                'name': nameAttribute
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            if (data.status === 'success') {
+                window.location.href = '/page1?tab=' +nameAttribute;
+            } else {
+                console.error('Error in response data:', data);
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+    
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    </script>
+{% endblock body %}

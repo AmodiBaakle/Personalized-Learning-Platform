@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% block title %}Navigator{% endblock title %}
+{% block head %}
+<style>
+    @font-face {
+        font-family: 'TT Norms Pro';
+        src: url('/static/fonts/TTNormsPro-Regular.woff2') format('woff2'),
+             url('/static/fonts/TTNormsPro-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'TT Norms';
+        src: url('/static/fonts/TTNorms-Regular.woff2') format('woff2'),
+             url('/static/fonts/TTNorms-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    body {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin: 0; /* Reset default body margin */
+        padding: 0; /* Reset default body padding */
+        height: 100vh; /* Set body height to 100% of viewport height */
+        font-family: 'TT Norms', sans-serif; /* Apply TT Norms to all text */
+    }
+
+    .container {
+        width: 100%;
+        text-align: left;
+        margin-top: 20px; /* Adjust the top margin as needed */
+        padding-left: 150px;
+        padding-right: 150px;
+    }
+
+    .headline-margin {
+        margin-bottom: 50px; /* Adjust the value as needed */
+    }
+
+    .form-select.bg-grey {
+        background-color: #CDCDCD;
+        color: black; /* Optional: to change the text color for better contrast */
+        border-radius: 0px;
+    }
+
+    .btn-submit {
+        background-color: #007bff;
+        border: 1px solid #ccc; /* Add a border for better visibility */
+        border-radius: 20px; /* Increase border radius for rounded edges */
+        color: white; /* Set button text color to black */
+        margin-top: 50px; /* Add margin to the top */
+        width: 100px; /* Set button width to fit its content */
+        margin-bottom: 50px;
+        transition: background-color 0.3s ease; /* Smooth transition effect */
+    }
+
+    .btn-submit:hover {
+        background-color: #66b2ff; /* Lighter shade of the original color */
+    }
+
+    .form-align-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    select.form-select {
+        background-color: #DFDFDF; /* Light gray background */
+    }
+
+    h1.text-center {
+        font-family: 'TT Norms Pro', sans-serif; /* Apply TT Norms Pro to the heading */
+    }
+
+    .alert-container {
+        width: 100%;
+        padding: 20px;
+        margin-top: 20px;
+        text-align: center;
+    }
+</style>
+{% endblock head %}
+{% block body %}
+<div class="container">
+    <div class="alert-container">
+        <div id="alert-container" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+            Make sure you have filled all the fields
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <form id="navigator-form" method="POST" class="d-flex">
+        {% csrf_token %}
+        <div class="flex-fill me-2">
+            <fieldset>
+                <h1><b>LEARN</b></h1>
+                <h1 class="headline-margin">in your Own WAY!</h1>
+                <div class="mb-3">
+                    <label for="goal" name="goal" class="form-label">Your GOAL</label>
+                    <select id="goal" name="goal" class="form-select bg-grey">
+                        <option value="" selected disabled>Select your Goal</option>
+                        <option value="Python Programming">Python Programming</option>
+                        <option value="DSA">DSA</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="language" class="form-label">Preferred language</label>
+                    <select id="language" name="language" class="form-select bg-grey">
+                        <option value="" selected disabled>Select a language</option>
+                        <option value="Python">Python</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="level" class="form-label">Your Level of Understanding</label>
+                    <select id="level" name="level" class="form-select bg-grey">
+                        <option value="" selected disabled>Select your understanding level</option>
+                        {% for sub_topic in levels %}
+                        <option value="{{ sub_topic }}">{{ sub_topic }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="platform" class="form-label">Preferred Platform</label>
+                    <select id="platform" name="platform" class="form-select bg-grey">
+                        <option value="" selected disabled>Select a platform</option>
+                        <option value="GFG">Geeks for Geeks</option>
+                        <option value="W3Schools">W3Schools</option>
+                        <option value="YouTube">YouTube</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="content-type" class="form-label">Type of Content</label>
+                    <select id="content-type" name="content-type" class="form-select bg-grey">
+                        <option value="" selected disabled>Select your content type</option>
+                        <option value="Video">Video</option>
+                        <option value="Text">Text</option>
+                    </select>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end align-items-center">
+            <img src="static/input_page2.png" alt="Image" class="img-fluid" style="max-width: 85%; height: auto;">
+        </div>
+        <div class="form-align-center submit-button-container">
+            <button method="submit" class="btn btn-submit" ><b>Next</b></button>
+        </div>
+    </form>
+    
+</div>
+
+<script>
+    // Listen for alert close event
+    document.querySelectorAll('.btn-close').forEach(button => {
+        button.addEventListener('click', function () {
+            const alert = button.closest('.alert');
+            alert.style.display = 'none';
+        });
+    });
+</script>
+{% endblock body %}

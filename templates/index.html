@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock title %}
+{% block head %}
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=TT+Norms:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=TT+Commons+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS */
+        .container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 150px;
+            padding-right: 150px;
+        }
+
+        .hero-container {
+            position: relative;
+            text-align: center;
+            margin-top: 20px; /* Adjust this value as needed to overlap the navbar */
+            margin-bottom: 50px;
+        }
+
+        .about-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            margin-bottom: 80px;
+            gap: 20px;
+            
+        }
+
+        .about-left {
+            width: 50%;
+            padding: 20px;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .about-left h2 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom:50px;
+        }
+
+        .about-left p {
+            font-family: 'TT Norms', sans-serif;
+           
+        }
+
+        .about-left .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            margin-top: 20px;
+        }
+
+        .about-right {
+            width: 50%;
+            text-align: center;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-right video {
+            width: 95%;
+            height: auto;
+            max-width: 1000px;
+            max-height: 800px;
+            
+        }
+
+
+        .team-container {
+            margin-bottom: 50px;
+        }
+        
+        .team-heading {
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            margin-bottom: 50px; /* Add margin below the heading */
+        }
+        
+        .member-image {
+            max-width: 220px; /* Scale down the size of member images */
+            height: auto; /* Maintain aspect ratio */
+        }
+        
+        .member-name {
+            font-family: 'Playfair Display', serif;
+            margin-top: 40px;
+        }
+        
+        .member-role {
+            font-family: 'TT Norms', sans-serif;
+            margin-bottom: 10px; /* Add margin below member role */
+        }
+        
+        .footer {
+            background-color: #3D3D3D;
+            padding: 40px 20px; /* Increase padding to increase the height */
+            color: white;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .footer img {
+            max-width: 100px; /* Smaller logo */
+        }
+        
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .footer-left img {
+            max-width: 500px; /* Increase this value to scale up the image size */
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        
+        .footer-right {
+            text-align: center;
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            height: 100%; /* Ensure it takes the full height of the footer */
+            margin-right: 100px; /* Adjust this value to shift content to the left */
+        }
+        
+        .footer-right h1 {
+            font-family: 'TT Commons Pro', sans-serif;
+            margin-top:30px ;
+        }
+        
+        .footer-right p {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+        
+        .footer-right .team-signature {
+            font-family: 'TT Norms', sans-serif;
+        }
+        
+    </style>
+{% endblock head %}
+
+{% block body %}
+<div class="container hero-container" data-aos="fade-up">
+    <img src="static/herospot.png" alt="Hero Spot Image" class="img-fluid" style="max-width: 100%;">
+</div>
+
+<div class="container about-container">
+    <div class="about-left" data-aos="fade-right">
+        <h2><b>Our Platform</b></h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <a href="/dashboard" class="btn btn-primary">Let's Begin</a>
+    </div>
+    <div class="about-right" data-aos="fade-left">
+        <video autoplay loop muted>
+            <source src="static/bulb_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+
+<div class="container team-container" data-aos="fade-up">
+    <h2 class="text-center team-heading">Our Team</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-3 text-center">
+            <img src="static/riya_role.png" alt="Team Member 1" class="img-fluid rounded-circle mb-2 member-image">
+            <h5 class="member-name"><b>Riya Jain</b></h5>
+            <p class="member-role">Leader and Strategist</p>
+        </div>
+        <div class="col-md-3 text-center">
+            <img src="static/amodi_role.png" alt="Team Member 2" class="img-fluid rounded-circle mb-2 member-image">
+            <h5 class="member-name"><b>Amodi Baakle</b></h5>
+            <p class="member-role">Frontend Developer</p>
+        </div>
+        <div class="col-md-3 text-center">
+            <img src="static/tanay_role.png" alt="Team Member 3" class="img-fluid rounded-circle mb-2 member-image">
+            <h5 class="member-name"><b>Tanay Shimpi</b></h5>
+            <p class="member-role">Backend Developer</p>
+        </div>
+        <div class="col-md-3 text-center">
+            <img src="static/adnan_role.png" alt="Team Member 4" class="img-fluid rounded-circle mb-2 member-image">
+            <h5 class="member-name"><b>Adnan Shah</b></h5>
+            <p class="member-role">Research and Development</p>
+        </div>
+    </div>
+</div>
+
+<div class="container footer" data-aos="fade-up">
+    <div class="footer-content">
+        <div class="footer-left">
+            <img src="static/footerImage.png" alt="Footer Image" >
+        </div>
+        <div class="footer-right">
+            <img src="static/white_logo.png" alt="Logo">
+            <h1><b>MindSET</b></h1>
+            <p>“A platform that offers more than just learning. It is a mirror that reflects your progress and makes you knowledgeable and confident every time.”</p>
+            <p class="team-signature">- Best regards, Team MindSET</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000, // Duration of the animations
+        easing: 'ease-in-out', // Easing function for animations
+        once: true, // Whether animation should happen only once - while scrolling down
+        mirror: false // Whether elements should animate out while scrolling past them
+    });
+</script>
+{% endblock body %}
+
+
