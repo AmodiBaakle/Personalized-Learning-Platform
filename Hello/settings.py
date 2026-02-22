@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-l@mrbeqbpwyu0r7m!xy5t7$gs_%7wy3_nh*+_cd)g%)-rs-=j!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["mindset.echopalette.in"]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition
